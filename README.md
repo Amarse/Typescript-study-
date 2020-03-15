@@ -1,2 +1,2 @@
-# Typescript-study-
+# Typescript-study
 typescript start

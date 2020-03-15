@@ -1,0 +1,20 @@
+{
+  "name": "typescript-study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Amarse/Typescript-study.git",
+  "author": "Amarse <byicy08@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^8.6.2",
+    "tslint": "^6.1.0",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -p .",
+    "exec": "ts-node ./src/main.ts",
+    "build": "yarn run lint && tsc",
+    "start": "ts-node ./src/chapter-01/04.For-While.ts"
+  }
+}
