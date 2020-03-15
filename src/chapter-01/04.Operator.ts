@@ -33,6 +33,17 @@ five == 5 || five == 6 //ture 둘 중 하나가 참일때
 // 판별조건 ? 표현식1 : 표현식2
 1 < 2 ? console.log('true') : console.log('false');
 
+//디스트럭처링 (destructuring)
+const temp = {
+  nam: 'test',
+  count: 2,
+  value: 10
+}
+
+const { nam, count } = temp;
+console.log(nam); //print: test
+console.log(count);//print: 2
+
 //-전개연산자 (얕은 복사 방식)
 //배열요소 확장
 let number: Array<number> = [3, 4, 5];
@@ -70,3 +81,4 @@ console.log(a); //print: 10
 console.log(b); //print: 20
 console.log(c); //print: { c: 30, d: 40 }
 //a와 b를 뺀 나머지 요소를 객체로 받음.
+
