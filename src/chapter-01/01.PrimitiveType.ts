@@ -68,8 +68,8 @@ let notSure: any = 4;
 notSure = "문자열일수도 있다";
 notSure = false; 
 
-//런타임에 ifItExists가 존재할 수 있습니다.
-//toFixed는 존재합니다. (그러나 컴파일러는 체크하지 않습니다)
+//런타임에 ifItExists가 존재할 수 있다.
+//toFixed는 존재합니다. (그러나 컴파일러는 체크하지 않는다)
 let noSure: any = 4;
 notSure.ifItExists(); 
 notSure.toFixed(); 
