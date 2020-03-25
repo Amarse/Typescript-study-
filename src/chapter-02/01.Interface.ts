@@ -139,6 +139,9 @@ console.log(myStr); //print: Bob
 
 //예제2
 class Animal {
+  move(arg0: number) {
+      throw new Error("Method not implemented.");
+  }
   name: string;
 }
 
