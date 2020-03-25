@@ -1,4 +1,5 @@
 //클래스
+
 //예제1
 class Greeter { //클래스 선언
     greeting: string; //속성
