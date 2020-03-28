@@ -281,4 +281,3 @@ square.color = "blue";
 square.sideLength = 10;
 square.penWidth = 5.0;
 
-//인터페이스 확장 클래스(Interfaces Extending Classes)
