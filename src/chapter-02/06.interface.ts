@@ -151,7 +151,7 @@ class Planet {
 
 class Earth extends Planet {
     public features: string[] = ["soil", "water", "oxyzen"];
-    stopTransduction(): void {
+    stopTransduction(): void { //오버라이딩
         console.log("stop2");
         this.isTransduction = false;
     }
@@ -160,6 +160,96 @@ let earth: Planet = new Earth();
 earth.diameter = 12656.2;
 console.log("1번 : " + earth.diameter); //1번 : 12656.2
 console.log("2번 : " + earth.getIsTransduction()); //2번 : true
-earth.stopTransduction(); //stop2
+earth.stopTransduction(); //stop2 - 오버라이든 매서드보다 오버라이딩 메서드가 우선으로 호출 되기 때문에 stop2 가 찍힘.
 console.log("3번 : " + earth.getIsTransduction()); //3번 : false
 // console.log(earth.features); //접근불가
+
+
+//추상클래스 - 부모가 추상클래스이고 이를 상속하는 자식클래스 간에도 다형성이 존재한다.
+abstract class Train {
+    constructor(protected speed: number) {}
+    speedUp(): void {
+        this.speed++;
+    }
+    abstract getSpeed(): number;
+}
+class Ktx extends Train {
+    constructor(protected speed: number) {
+        super(speed);    
+    }
+    public getSpeed(): number {
+        return this.speed;
+    }
+    public speedUpUp(): void {
+        this.speed += 2;
+    }
+}
+let ktx: Train = new Ktx(300);
+console.log("현재 속도 : " + ktx.getSpeed() + "km"); //현재 속도 : 300km
+ktx.speedUp();
+console.log("현재 속도 : " + ktx.getSpeed() + "km"); //현재 속도 : 301km
+
+//할당 객체의 타입은 Ktx지만 할당될 때 Train 타입으로 업 캐스팅(upcasting)되어 다형성이 생긴다.
+//객체 참조변수(ktx)는 추상클래스(Train)에 선언된 요소에는 접근할 수 있지만, 할당 객체의 타입(Ktx)에 선언된 요소에는 접근 할 수 없다.
+
+//인터페이스의 다형성 - 클래스가 인터페이스를 구현하고 있을 때 해당 인터페이스를 타입으로 가지는 객체 참조변수가 구현 클래스의 객체를 참조함으로써 다형성을 가지게 된다.
+interface IPerson {
+    height: number;
+    getAlias: () => string;
+    getAge(): number;
+}
+class PoliceOfficer implements IPerson {
+    height: number;
+    getAlias = () => "happy";
+    getAge(): number {
+        return 10;
+    }
+    hasClub() {
+        return true;
+    }
+}
+let policeMan: IPerson = new PoliceOfficer();
+console.log(policeMan.getAlias()); //happy
+console.log(policeMan.getAge()); //10
+//인터페이스(IPerson)를 구현클래스(PoliceOfficer)가 구현하고 있으므로 객체 참조변수의 타입에 IPerson을 지정하고 구현 클래스를 할당 할 수 있다.
+//객체(new PoliceOfficer())가 본래 PoliceOfficer 타입이지만, 객체 참조변수(policeMan)로 할당됨으로써 인터페이스(IPerson) 를 기준으로 접근이 이루어 진다.
+//객체 참조변수(policeMan)는 인터페이스에 정의 된 height 멤버번수, getAlias 메서드, getAge 메서드에 접근할 수 있지만, 
+//구현클래스에서 새롭게 추가된 hasClub 메서드에 접근할 수 없다.
+
+
+// 매개변수의 다형성(유니언 타입 이용)
+// 매개변수 타입을 유니언타입을 이용함으로써 객체가 다형성의 성질을 띠도록 만들 수 있다.
+class MonitorDisplayTest {
+    display(data: string | number) { //오버로딩 메서드
+        if (typeof data === "string") {
+            return "string" + data;
+        } else {
+            return "number" + data;
+        }
+    }
+}
+let displayTest = new MonitorDisplayTest();
+displayTest.display("happy");
+displayTest.display(123);
+//display 메서드는 여러 타입을 받아들이므로 typeof로 타입검사를 수행하는 타입 가드를 추가해야 한다.
+
+//매개변수에 클래스타입을 유니언타입으로 선언해 여러 클래스 타입을 받아 instansceof 로 타입 가드를 추가해야 한다.
+class MonitorDisplayTest {
+    display1(monitor: Led | Oled) {
+        //변수에 지정된 타입과 타입 어셜션은 생략 가능
+        let myMonitor: Led = <Led>monitor;
+        return myMonitor.getName();
+    }
+    else if(monitor instanceof Oled) {
+        let myMonitor: Oled = <Oled>monitor;
+        return mymoniter.getName();
+
+    }
+}
+let displayTest = new MonitorDisplayTest();
+displayTest.display1(new Led("LED TV"));
+displayTest.display1(new Oled("OLED TV"));
+
+
+//11. 클래스에서 getter와 setter
+//getter = 접근자(accessor) 라 하고 setter = 설정자(mutator)라 한다.
