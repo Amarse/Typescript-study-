@@ -23,3 +23,4 @@ function concat<T>(strs: T, strs2: T) {
 }
 concat("abc", "123"); //타입 인수를 생략(타입을 추론해서 함)
 concat<string>("abc", "123"); //타입 인수 추가 (명시적인 타입이 선언됨)
+
