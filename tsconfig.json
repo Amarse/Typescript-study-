@@ -7,7 +7,7 @@
     "strictNullChecks": true,
     "sourceMap": false,
     "outDir": "./dist",
-    "baseUrl": "./"
+    "baseUrl": "./",
   },
   "include": [
     "./src/**/*"
