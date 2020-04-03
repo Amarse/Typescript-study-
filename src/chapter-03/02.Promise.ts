@@ -150,3 +150,64 @@ async function hello() {
     await run1();
     await run2();
 }
+
+// // Async/Await 를 도입해 비동기 처리를 동기로 실행하기
+function delay2(msg: string) {
+    let ms: number = Math.floor(Math.random() * 1000) + 1;
+    return new Promise(function(){
+        setTimeout(resolve, ms, msg);
+    }).then(function (v) {
+        console.log(v, ms + 'ms');
+    });
+}
+
+async function sync2() {
+    let start = new Date().getTime();
+
+    await delay2('a');
+    await delay2('b');
+    await delay2('c');
+
+    let end = new Date().getTime();
+    console.log('시간 : ', end - start + 'ms');
+}
+sync2();
+
+
+// 비동기 함수의 처리 결과가 영향을 미치도록 동기화 실행
+function delay3(msg, ms): Promise<string> {
+    //프로미스가 지연시간이 지나면 결정 값을 반환해 줌.
+}
+
+// delay3 함수가 호출될때 await 키워드를 붙여서 호출 할 수 있다.
+
+let result1: string =  await delay3('a', 1000);
+let result2: string = await delay3(result1 + 'b', 500);
+let result3: string = await delay3(result2 + 'c', 100);
+
+//비동기 함수이 호출 결과가 이어서 호출되는 비동기 함수에 영향을 미치도록 함.
+function delay3(msg, ms): Promise<any> {
+    return new Promise(function(resolve){
+        setTimeout(function () {
+            resolve(msg);
+        }, ms);
+    }).then(function(v) {
+        console.log(v + '' + ms + 'ms');
+        return v;
+    });
+}
+
+async function sync3() {
+    let start =  new Date().getTime();
+    let result1: Promise<any> = await delay3('a', 1000);
+    let result2: Promise<any> = await delay3(result1 + 'b', 500);
+    let result3: Promise<any> = await delay3(result2 + 'c', 100);
+
+    let end = new Date().getTime();
+    console.log('시간 : ', end - start + 'ms');
+}
+
+sync3();
+
+//delay3 함수가 호출 되고 나서 1000ms 지연 후 호출 된 결과를 result1에  'a' 로 할당하고, 이어서 result2에는 이전 실행 결과와 합해 'ab' 문자열을 500ms 지연후 할당한다.
+//result3 도 이전 결과를 합해 'abc' 문자열을 합해 100ms 지연 후 할당한다.
