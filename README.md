@@ -2,6 +2,7 @@
 typescript start
 
 -책
+
 http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791186710302&orderClick=LAG&Kc=
 
 타입스크립트 퀵스타트책에 대한 전체 스터디이며 
